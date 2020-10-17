@@ -5,4 +5,6 @@
 #include "Gra.h"
 #include "Enums.h"
 
-void menu();
+void menu1();
+
+void menu2(bool Komputer);

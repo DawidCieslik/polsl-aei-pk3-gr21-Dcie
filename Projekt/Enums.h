@@ -21,4 +21,5 @@ namespace
 	const float RozmiarPionka = 25.f;
 	sf::Color jasny(238, 232, 170);
 	sf::Color ciemny(128, 17, 4);
+	sf::Color szary(127, 127, 127);
 }

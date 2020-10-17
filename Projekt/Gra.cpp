@@ -2,11 +2,6 @@
 
 void Gra(std::string &Gracz1, std::string &Gracz2, bool &gracz)
 {
-	sf::RenderWindow window{ sf::VideoMode{ 900, 950 }, "Warcaby" };
-	window.setVerticalSyncEnabled(1);
-	sf::Event event;
-	Plansza plansza;
-
 	sf::Texture texture;
 	if (!texture.loadFromFile("Images/Background.jpg"))
 		Blad(2);
@@ -32,6 +27,11 @@ void Gra(std::string &Gracz1, std::string &Gracz2, bool &gracz)
 	sf::FloatRect textCenter2 = tura.getLocalBounds();
 	tura.setOrigin(textCenter2.left + textCenter2.width / 2.f, 0.f);
 	tura.setPosition(sf::Vector2f(RozmiarOknaX / 2.f, 65.f));
+
+	sf::RenderWindow window{ sf::VideoMode{ 900, 950 }, "Warcaby", sf::Style::Close };
+	window.setVerticalSyncEnabled(1);
+	sf::Event event;
+	Plansza plansza;
 
 	while (window.isOpen())
 	{

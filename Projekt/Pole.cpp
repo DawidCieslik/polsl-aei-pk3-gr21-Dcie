@@ -2,8 +2,8 @@
 
 Pole::Pole()
 {
-	x = 0;
-	y = 0;
+	x = 0.f;
+	y = 0.f;
 	CzyZajete = false;
 	shape.setSize(sf::Vector2f(RozmiarPola, RozmiarPola));
 	shape.setOutlineThickness(1);
