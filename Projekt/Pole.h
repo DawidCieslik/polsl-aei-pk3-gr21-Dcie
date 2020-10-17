@@ -12,13 +12,13 @@ class Pole
 public:
 	Pole();												//<Konstruktor domyslny: ustawia x=0; y=0; CzyZajete=false;
 	Pole(const Pole& new_field);						//<Konstruktor 
-	Pole(int x, int y);									//<Konstruktor ustawiajacy kwadrat we wskazanych wspolrzednych
-	void UstawX(int x);									//<Ustawia kwadrat w podanej wspolrzednej x
-	void UstawY(int y);									//<Ustawia kwadrat w podanej wspolrzednej y
+	Pole(float x, float y);								//<Konstruktor ustawiajacy kwadrat we wskazanych wspolrzednych
+	void UstawX(float x);								//<Ustawia kwadrat w podanej wspolrzednej x
+	void UstawY(float y);								//<Ustawia kwadrat w podanej wspolrzednej y
 	float PodajX();										//<Zwraca aktualna wspolrzedna x kwadratu
 	float PodajY();										//<Zwraca aktualna wspolrzedna y kwadratu
 	sf::RectangleShape Ksztalt();						//<Ustawia ksztalt
-	void Pozycja(int x, int y);							//<Ustawia kwadrat we wskazanym punkcie x y
+	void Pozycja(float x, float y);						//<Ustawia kwadrat we wskazanym punkcie x y
 	void Kolor(sf::Color Kolor);						//<Ustawia kolor kwadratu
 	Pole& operator=(const Pole& NowePole);				//<Przypisuje jeden kwadrat drugiemu
 };

@@ -12,11 +12,13 @@ enum class TypPionka
 
 namespace
 {
-	const int RozmiarOknaX = 900;
-	const int RozmiarOknaY = 950;
-	const int RozmiarPola = 100;
+	const float RozmiarMenuX = 700.f;
+	const float RozmiarMenuY = 900.f;
+	const float RozmiarOknaX = 900.f;
+	const float RozmiarOknaY = 950.f;
+	const float RozmiarPola = 100.f;
 	const int RozmiarPlanszy = 8;
-	const int RozmiarPionka = 25;
+	const float RozmiarPionka = 25.f;
 	sf::Color jasny(238, 232, 170);
 	sf::Color ciemny(128, 17, 4);
 }

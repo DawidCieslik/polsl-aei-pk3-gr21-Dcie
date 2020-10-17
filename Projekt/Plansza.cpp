@@ -1,5 +1,4 @@
 #include "Plansza.h"
-#include <iostream>
 
 Plansza::Plansza()
 {
@@ -42,7 +41,7 @@ void Plansza::InicjalizujPlansze()
 				NowePole->pole.Kolor(jasny);
 			else
 				NowePole->pole.Kolor(ciemny);
-			NowePole->pole.Pozycja(100*x+50, 100*y+100);
+			NowePole->pole.Pozycja(x+0.5f, y+1.f);
 			(*this) += NowePole;
 		}
 	}

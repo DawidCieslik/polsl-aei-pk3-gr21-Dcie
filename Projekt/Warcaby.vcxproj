@@ -145,12 +145,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Error.cpp" />
+    <ClCompile Include="Gra.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="Pole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plansza.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="Error.h" />
+    <ClInclude Include="Gra.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="Pole.h" />
     <ClInclude Include="Plansza.h" />
   </ItemGroup>

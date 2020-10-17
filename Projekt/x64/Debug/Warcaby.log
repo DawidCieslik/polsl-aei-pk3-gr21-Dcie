@@ -1,10 +1,6 @@
-﻿  Plansza.cpp
-  Pole.cpp
-C:\Programowanie\Warcaby\Pole.cpp(21,12): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-C:\Programowanie\Warcaby\Pole.cpp(22,12): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-C:\Programowanie\Warcaby\Pole.cpp(30,12): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-C:\Programowanie\Warcaby\Pole.cpp(35,12): warning C4244: "=": konwersja z "int" do "float", możliwa utrata danych
-C:\Programowanie\Warcaby\Pole.cpp(55,23): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Programowanie\Warcaby\Pole.cpp(55,20): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+﻿  Error.cpp
+  Gra.cpp
+  main.cpp
+  menu.cpp
   Generowanie kodu...
   Warcaby.vcxproj -> C:\Programowanie\Warcaby\x64\Debug\Warcaby.exe

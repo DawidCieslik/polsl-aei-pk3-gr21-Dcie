@@ -16,7 +16,7 @@ Pole::Pole(const Pole& NowePole)
 	CzyZajete = NowePole.CzyZajete;
 }
 
-Pole::Pole(int x, int y)
+Pole::Pole(float x, float y)
 {
 	this->x = x;
 	this->y = y;
@@ -25,12 +25,12 @@ Pole::Pole(int x, int y)
 	shape.setOutlineThickness(1);
 }
 
-void Pole::UstawX(int x)
+void Pole::UstawX(float x)
 {
 	this->x = x;
 }
 
-void Pole::UstawY(int y)
+void Pole::UstawY(float y)
 {
 	this->y = y;
 }
@@ -50,9 +50,9 @@ sf::RectangleShape Pole::Ksztalt()
 	return shape;
 }
 
-void Pole::Pozycja(int x, int y)
+void Pole::Pozycja(float x, float y)
 {
-	shape.setPosition(x, y);
+	shape.setPosition(x * 100.f, y * 100.f);
 }
 
 void Pole::Kolor(sf::Color Kolor)

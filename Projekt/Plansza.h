@@ -9,8 +9,8 @@ class Plansza
 	ListaPol* pHead;									//<Lista przechowujaca pola
 
 public:
-	Plansza();
-	~Plansza();
+	Plansza();											//<Konstruktor
+	~Plansza();											//<Destruktor
 	sf::RectangleShape PodajKsztalt(int i, int j);		//<Zwraca ksztalt danego pola
 	void InicjalizujPlansze();							//<Inicjalizuje plansze
 	void WyswietlPlansze(sf::RenderWindow &window);		//<Wyswietla plansze na ekranie
