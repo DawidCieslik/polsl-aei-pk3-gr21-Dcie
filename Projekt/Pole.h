@@ -5,29 +5,32 @@
 
 class Pole
 {
-	sf::RectangleShape shape;							//<Ksztalt
-	bool CzyZajete;										//<Czy w danym polu znajduje sie pionek/damka
-	float x;											//<Wspolrzedna x
-	float y;											//<Wspolrzedna y
+	sf::RectangleShape kwadrat;							//Ksztalt pola (prostokat);
+	bool CzyZajete;										//Czy w danym polu znajduje sie pionek/damka;
+protected:
+	float x;											//Wspolrzedna x;
+	float y;											//Wspolrzedna y;
 public:
-	Pole();												//<Konstruktor domyslny: ustawia x=0; y=0; CzyZajete=false;
-	Pole(const Pole& new_field);						//<Konstruktor 
-	Pole(float x, float y);								//<Konstruktor ustawiajacy kwadrat we wskazanych wspolrzednych
-	void UstawX(float x);								//<Ustawia kwadrat w podanej wspolrzednej x
-	void UstawY(float y);								//<Ustawia kwadrat w podanej wspolrzednej y
-	float PodajX();										//<Zwraca aktualna wspolrzedna x kwadratu
-	float PodajY();										//<Zwraca aktualna wspolrzedna y kwadratu
-	sf::RectangleShape Ksztalt();						//<Ustawia ksztalt
-	void Pozycja(float x, float y);						//<Ustawia kwadrat we wskazanym punkcie x y
-	void Kolor(sf::Color Kolor);						//<Ustawia kolor kwadratu
-	Pole& operator=(const Pole& NowePole);				//<Przypisuje jeden kwadrat drugiemu
+	const sf::Texture* tekstura;						//Tekstura pola
+	Pole();												//Konstruktor domyslny;
+	Pole(const Pole& NowePole);							//Konstruktor kopiujacy;
+	Pole(float x, float y);								//Konstruktor ustawiajacy pole we wskazanych wspolrzednych;
+	void UstawX(float x);								//Przypisuje dla pola podana wspolrzedna x;
+	void UstawY(float y);								//Przypisuje dla pola podana wspolrzedna y;
+	float PodajX();										//Zwraca aktualna wspolrzedna x pola;
+	float PodajY();										//Zwraca aktualna wspolrzedna y pola;
+	sf::RectangleShape Ksztalt();						//Zwraca ksztalt pola (prostokat);
+	void Pozycja(float x, float y);						//Ustawia pole we wskazanym punkcie (x,y);
+	void Tekstura(const sf::Texture *Tekstura);			//Ustawia teksturê pola;
+	void Kolor(const sf::Color &kolor);					//Ustawia kolor pola;
+	Pole& operator=(const Pole& NowePole);				//Przypisuje jedno pole drugiemu.
 };
 
-class ListaPol											//Lista przechowujaca pola
+class ListaPol																			//Lista przechowujaca pola;
 {
 public:
-	Pole pole;
-	ListaPol* pNext;
-	ListaPol(const Pole& NowePole) : pole(NowePole), pNext(nullptr) {};
-	ListaPol() : pole(), pNext(nullptr) {};
+	Pole pole;																			//Element pola;
+	ListaPol* pNext;																	//Wskaznik na nastepny element listy pol;
+	ListaPol() : pole(), pNext(nullptr) {};												//Konstruktor domyslny;
+	ListaPol(const Pole& NowePole) : pole(NowePole), pNext(nullptr) {};					//Konstruktor kopiujacy.
 };

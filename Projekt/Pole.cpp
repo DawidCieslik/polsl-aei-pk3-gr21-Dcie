@@ -1,18 +1,22 @@
 #include "Pole.h"
+#include "Error.h"
 
 Pole::Pole()
 {
 	x = 0.f;
 	y = 0.f;
 	CzyZajete = false;
-	shape.setSize(sf::Vector2f(RozmiarPola, RozmiarPola));
-	shape.setOutlineThickness(1);
+	tekstura = nullptr;
+	kwadrat.setSize(sf::Vector2f(RozmiarPola, RozmiarPola));
+	kwadrat.setOutlineThickness(5);
+	kwadrat.setOutlineColor(sf::Color::Black);
 }
 
 Pole::Pole(const Pole& NowePole)
 {
 	x = NowePole.x;
 	y = NowePole.y;
+	tekstura = NowePole.tekstura;
 	CzyZajete = NowePole.CzyZajete;
 }
 
@@ -21,8 +25,10 @@ Pole::Pole(float x, float y)
 	this->x = x;
 	this->y = y;
 	CzyZajete = false;
-	shape.setSize(sf::Vector2f(RozmiarPola, RozmiarPola));
-	shape.setOutlineThickness(1);
+	tekstura = nullptr;
+	kwadrat.setSize(sf::Vector2f(RozmiarPola, RozmiarPola));
+	kwadrat.setOutlineThickness(5);
+	kwadrat.setOutlineColor(sf::Color::Black);
 }
 
 void Pole::UstawX(float x)
@@ -47,17 +53,22 @@ float Pole::PodajY()
 
 sf::RectangleShape Pole::Ksztalt()
 {
-	return shape;
+	return kwadrat;
 }
 
 void Pole::Pozycja(float x, float y)
 {
-	shape.setPosition(x * 100.f, y * 100.f);
+	kwadrat.setPosition(x * RozmiarPola, y * RozmiarPola);
 }
 
-void Pole::Kolor(sf::Color Kolor)
+void Pole::Tekstura(const sf::Texture *tekstura)
 {
-	shape.setFillColor(Kolor);
+	this->tekstura = tekstura;
+}
+
+void Pole::Kolor(const sf::Color &kolor)
+{
+	kwadrat.setFillColor(kolor);
 }
 
 Pole& Pole::operator=(const Pole& NowePole)

@@ -6,4 +6,4 @@
 #include "Error.h"
 #include "Enums.h"
 
-void Gra(std::string &Gracz1, std::string &Gracz2, bool &gracz);
+void Gra(sf::Text &Gracz1, sf::Text &Gracz2, bool &Komputer);

@@ -1,27 +1,31 @@
 #include "Error.h"
 
-void Blad(int RodzajBledu)
+void Blad(unsigned int RodzajBledu)
 {
     switch (RodzajBledu)
     {
     case 1:
     {
-        fputs("Niewlasciwe parametry.", stderr);
+        std::string error = "Nie ma takiego pola!";
+        throw error;
         break;
     }
     case 2:
     {
-        fputs("Nie moge otworzyc pliku!", stderr);
+        std::string error = "Wczytywanie pliku nie powiod³o siê!";
+        throw error;
         break;
     }
     case 3:
     {
-        fputs("Plik jest pusty.", stderr);
+        std::string error = "Nazwy graczy nie moga byc takie same!";
+        throw error;
         break;
     }
     case 4:
     {
-        fputs("Blad alokacji pamieci.", stderr);
+        std::string error = "Nazwy graczy nie moga byc puste!";
+        throw error;
         break;
     }
     }

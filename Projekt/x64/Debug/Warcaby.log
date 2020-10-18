@@ -1,2 +1,10 @@
-﻿  menu.cpp
+﻿  Gra.cpp
+C:\Programowanie\Warcaby\Gra.cpp(79,27): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Programowanie\Warcaby\Gra.cpp(81,27): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Programowanie\Warcaby\Gra.cpp(83,27): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Programowanie\Warcaby\Gra.cpp(85,27): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Programowanie\Warcaby\Gra.cpp(93,27): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Programowanie\Warcaby\Gra.cpp(95,27): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Programowanie\Warcaby\Gra.cpp(97,27): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
+C:\Programowanie\Warcaby\Gra.cpp(99,27): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
   Warcaby.vcxproj -> C:\Programowanie\Warcaby\x64\Debug\Warcaby.exe
