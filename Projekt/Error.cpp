@@ -6,7 +6,7 @@ void Blad(unsigned int RodzajBledu)
     {
     case 1:
     {
-        std::string error = "Nie ma takiego pola!";
+        std::string error = "Nie ma takiego pola lub pionka!";
         throw error;
         break;
     }
@@ -18,7 +18,7 @@ void Blad(unsigned int RodzajBledu)
     }
     case 3:
     {
-        std::string error = "Nazwy graczy nie moga byc takie same!";
+        std::string error = "Gracz nie moze przyjmowac nazwy Komputer!";
         throw error;
         break;
     }

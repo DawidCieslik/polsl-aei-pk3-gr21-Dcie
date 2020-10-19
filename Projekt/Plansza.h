@@ -13,13 +13,12 @@ class Plansza : public Pionek
 public:
 	Plansza();											//Konstruktor domyœlny;
 	~Plansza();											//Destruktor;
-	sf::RectangleShape KsztaltPola(int i, int j);		//Zwraca ksztalt pola;
-	sf::CircleShape KsztaltPionka(int i, int j);		//Zwraca ksztalt pionka;
 	Pionek& DajPionek(int i, int j);					//Zwraca pionka;
 	Pole& DajPole(int i, int j);						//Zwraca pole;
 	void InicjalizujPlansze();							//Inicjalizuje plansze;
 ;	void RozstawPionki();								//Rozstawia pionki na planszy;
 	void WyswietlPlansze(sf::RenderWindow &window);		//Wyswietla plansze na ekranie;
+	void RysujPionki(sf::RenderWindow& window);			//Wyswietla pionki na ekranie;
 	Plansza& operator+=(ListaPol* NowePole);			//Dodaje nowe pole do listy pol;
 	Plansza& operator+=(ListaPionkow* NowyPionek);		//Dodaje nowego pionka do listy pionkow.
 };

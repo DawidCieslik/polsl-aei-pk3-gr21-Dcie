@@ -3,50 +3,47 @@
 
 Pole::Pole()
 {
-	x = 0.f;
-	y = 0.f;
-	CzyZajete = false;
-	tekstura = nullptr;
+	x = 0;
+	y = 0;
+	typ = PUSTE;
 	kwadrat.setSize(sf::Vector2f(RozmiarPola, RozmiarPola));
 	kwadrat.setOutlineThickness(5);
-	kwadrat.setOutlineColor(sf::Color::Black);
+	kwadrat.setOutlineColor(czarny);
 }
 
 Pole::Pole(const Pole& NowePole)
 {
 	x = NowePole.x;
 	y = NowePole.y;
-	tekstura = NowePole.tekstura;
-	CzyZajete = NowePole.CzyZajete;
+	typ = NowePole.typ;
 }
 
-Pole::Pole(float x, float y)
+Pole::Pole(int x, int y)
 {
 	this->x = x;
 	this->y = y;
-	CzyZajete = false;
-	tekstura = nullptr;
+	typ = PUSTE;
 	kwadrat.setSize(sf::Vector2f(RozmiarPola, RozmiarPola));
 	kwadrat.setOutlineThickness(5);
-	kwadrat.setOutlineColor(sf::Color::Black);
+	kwadrat.setOutlineColor(czarny);
 }
 
-void Pole::UstawX(float x)
+void Pole::UstawX(int x)
 {
 	this->x = x;
 }
 
-void Pole::UstawY(float y)
+void Pole::UstawY(int y)
 {
 	this->y = y;
 }
 
-float Pole::PodajX()
+int Pole::PodajX()
 {
 	return x;
 }
 
-float Pole::PodajY()
+int Pole::PodajY()
 {
 	return y;
 }
@@ -56,14 +53,9 @@ sf::RectangleShape Pole::Ksztalt()
 	return kwadrat;
 }
 
-void Pole::Pozycja(float x, float y)
+void Pole::Pozycja(int x, int y)
 {
-	kwadrat.setPosition(x * RozmiarPola, y * RozmiarPola);
-}
-
-void Pole::Tekstura(const sf::Texture *tekstura)
-{
-	this->tekstura = tekstura;
+	kwadrat.setPosition(x * RozmiarPola + 50, y * RozmiarPola + 100);
 }
 
 void Pole::Kolor(const sf::Color &kolor)
@@ -71,10 +63,15 @@ void Pole::Kolor(const sf::Color &kolor)
 	kwadrat.setFillColor(kolor);
 }
 
+void Pole::setOutlineColor(sf::Color kolor)
+{
+	kwadrat.setOutlineColor(kolor);
+}
+
 Pole& Pole::operator=(const Pole& NowePole)
 {
 	x = NowePole.x;
 	y = NowePole.y;
-	CzyZajete = NowePole.CzyZajete;
+	typ = NowePole.typ;
 	return *this;
 }

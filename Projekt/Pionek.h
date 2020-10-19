@@ -7,21 +7,20 @@
 class Pionek : public Pole
 {
 	sf::CircleShape kolo;								//Ksztalt pionka (kolo);
-	TypPionka typ;										//Typ i kolor pionka;
 public:
-	const sf::Texture* tekstura;						//Tekstura pionka;
 	Pionek();											//Konstruktor domyslny;
 	Pionek(const Pionek& NowyPionek);					//Konstruktor kopiujacy;
-	Pionek(float x, float y, TypPionka typ);			//Konstruktor ustawiajacy pionka we wskazanych wspolrzednych;
-	void UstawX(float x);								//Przypisuje dla pionka podana wspolrzedna x;
-	void UstawY(float y);								//Przypisuje dla pionka podana wspolrzedna y;
-	void UstawTyp(TypPionka typ);						//Przydziela pionkowi jego typ i kolor;
-	float PodajX();										//Zwraca aktualna wspolrzedna x pionka;
-	float PodajY();										//Zwraca aktualna wspolrzedna y pionka;
+	Pionek(int x, int y);								//Konstruktor ustawiajacy pionka we wskazanych wspolrzednych;
+	void UstawX(int x);									//Przypisuje dla pionka podana wspolrzedna x;
+	void UstawY(int y);									//Przypisuje dla pionka podana wspolrzedna y;
+	void setOrigin();									//Ustawia punkt zaczepienia pionka;
+	sf::Vector2f getOrigin();							//Zwraca wspolrzedne punktu zaczepienia;
+	int PodajX();										//Zwraca aktualna wspolrzedna x pionka;
+	int PodajY();										//Zwraca aktualna wspolrzedna y pionka;
 	sf::CircleShape Ksztalt();							//Zwraca ksztalt pionka (kolo);
-	void Pozycja(float x, float y);						//Ustawia pionek we wskazanym punkcie (x,y);
-	void Tekstura(const sf::Texture* Tekstura);			//Ustawia teksturê pionka;
+	void Pozycja(int x, int y);							//Ustawia pionek we wskazanym punkcie (x,y);
 	void Kolor(const sf::Color& kolor);					//Ustawia kolor pionka;
+	void setOutlineColor(sf::Color kolor);				//Ustawia kolor konturu pionka;
 	Pionek& operator=(const Pionek& NowyPionek);		//Przypisuje jeden pionek drugiemu.
 };
 

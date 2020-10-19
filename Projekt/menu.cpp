@@ -10,28 +10,28 @@ void menu1()
 	std::string s1 = "WYBIERZ   TRYB";
 	sf::Text Naglowek(s1, font);
 	Naglowek.setCharacterSize(80);
-	Naglowek.setFillColor(sf::Color::Black);
+	Naglowek.setFillColor(czarny);
 	sf::FloatRect textCenter1 = Naglowek.getLocalBounds();
-	Naglowek.setOrigin(textCenter1.left + textCenter1.width / 2.f, 0.f);
-	Naglowek.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, 20.f));
+	Naglowek.setOrigin(textCenter1.left + textCenter1.width / 2, 0);
+	Naglowek.setPosition(sf::Vector2f(RozmiarMenuX / 2, 20));
 
 	//NAPIS "DWÓCH GRACZY"
 	std::string s2 = "Komputer";
 	sf::Text Komp(s2, font);
 	Komp.setCharacterSize(60);
-	Komp.setFillColor(sf::Color::Black);
+	Komp.setFillColor(czarny);
 	sf::FloatRect textCenter2 = Komp.getLocalBounds();
-	Komp.setOrigin(textCenter2.left + textCenter2.width / 2.f, 0.f);
-	Komp.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, 140.f));
+	Komp.setOrigin(textCenter2.left + textCenter2.width / 2, 0);
+	Komp.setPosition(sf::Vector2f(RozmiarMenuX / 2, 140));
 
 	//NAPIS "DWÓCH GRACZY"
 	std::string s3 = "Dwóch  graczy";
 	sf::Text Gracz(s3, font);
 	Gracz.setCharacterSize(60);
-	Gracz.setFillColor(sf::Color::Black);
+	Gracz.setFillColor(czarny);
 	sf::FloatRect textCenter3 = Gracz.getLocalBounds();
-	Gracz.setOrigin(textCenter3.left + textCenter3.width / 2.f, 0.f);
-	Gracz.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, 520.f));
+	Gracz.setOrigin(textCenter3.left + textCenter3.width / 2, 0);
+	Gracz.setPosition(sf::Vector2f(RozmiarMenuX / 2, 520));
 
 	//T£O MENU
 	sf::Texture Back;
@@ -48,8 +48,8 @@ void menu1()
 	CompIcon.setTexture(Comp);
 	CompIcon.setScale(sf::Vector2f(0.55f, 0.55f));
 	sf::FloatRect Center2 = CompIcon.getLocalBounds();
-	CompIcon.setOrigin(Center2.left + Center2.width / 2.f, Center2.top + Center2.height / 2.f);
-	CompIcon.setPosition(sf::Vector2f(RozmiarMenuX/2, RozmiarMenuY/2 - 150.f));
+	CompIcon.setOrigin(Center2.left + Center2.width / 2, Center2.top + Center2.height / 2);
+	CompIcon.setPosition(sf::Vector2f(RozmiarMenuX/2, RozmiarMenuY/2 - 150));
 
 	//IKONA DLA DWÓCH GRACZY
 	sf::Texture TwoPlayers;
@@ -58,7 +58,7 @@ void menu1()
 	sf::Sprite TwoPlayersIcon;
 	TwoPlayersIcon.setTexture(TwoPlayers);
 	sf::FloatRect Center3 = TwoPlayersIcon.getLocalBounds();
-	TwoPlayersIcon.setOrigin(Center3.left + Center3.width / 2.f, Center3.top + Center3.height / 2.f);
+	TwoPlayersIcon.setOrigin(Center3.left + Center3.width / 2, Center3.top + Center3.height / 2);
 	TwoPlayersIcon.setPosition(sf::Vector2f(RozmiarMenuX/2, RozmiarMenuY/2+260));
 
 	//OKNO MENU
@@ -105,7 +105,7 @@ void menu1()
 
 void menu2(bool Komputer)
 {
-	bool focus1 = false;	//FOCUS NA POLU TEKSTOWYM 1
+	bool focus1 = true;		//FOCUS NA POLU TEKSTOWYM 1
 	bool focus2 = false;	//FOCUS NA POLU TEKSTOWYM 2
 
 	sf::Font font;			//CZCIONKA
@@ -119,37 +119,37 @@ void menu2(bool Komputer)
 
 	//POLE TEKSTOWE 1
 	sf::RectangleShape prostokat1;
-	prostokat1.setSize(sf::Vector2f(500.f, 50.f));
-	prostokat1.setOrigin(sf::Vector2f(250.f, 25.f));
-	prostokat1.setFillColor(sf::Color::White);
+	prostokat1.setSize(sf::Vector2f(500, 50));
+	prostokat1.setOrigin(sf::Vector2f(250, 25));
+	prostokat1.setFillColor(bialy);
 	prostokat1.setOutlineColor(szary);
 	prostokat1.setOutlineThickness(2);
 	if (Komputer == false)
-		prostokat1.setPosition(RozmiarMenuX / 2.f, 230.f);
+		prostokat1.setPosition(RozmiarMenuX / 2, 230);
 	else if (Komputer == true)
-		prostokat1.setPosition(RozmiarMenuX / 2.f, RozmiarMenuY / 2.f - 120.f);
+		prostokat1.setPosition(RozmiarMenuX / 2, RozmiarMenuY / 2 - 120);
 	sf::FloatRect p1 = prostokat1.getGlobalBounds();
 
 	//POLE TEKSTOWE 2
 	sf::RectangleShape prostokat2;
-	prostokat2.setSize(sf::Vector2f(500.f, 50.f));
-	prostokat2.setOrigin(sf::Vector2f(250.f, 25.f));
-	prostokat2.setFillColor(sf::Color::White);
+	prostokat2.setSize(sf::Vector2f(500, 50));
+	prostokat2.setOrigin(sf::Vector2f(250, 25));
+	prostokat2.setFillColor(bialy);
 	prostokat2.setOutlineColor(szary);
 	prostokat2.setOutlineThickness(2);
-	prostokat2.setPosition(RozmiarMenuX / 2.f, RozmiarMenuY / 2.f + 95.f);
+	prostokat2.setPosition(RozmiarMenuX / 2, RozmiarMenuY / 2 + 95);
 	sf::FloatRect p2 = prostokat2.getGlobalBounds();
 
 	//NAZWA GRACZA 1
 	sf::Text Gracz1;
 	Gracz1.setFont(font);
 	Gracz1.setCharacterSize(50);
-	Gracz1.setFillColor(sf::Color::Black);
+	Gracz1.setFillColor(czarny);
 	Gracz1.setString("Bialy");
 	if (Komputer == false)
-		Gracz1.setPosition(sf::Vector2f(p1.left + 15.f, p1.top - 8.f));
+		Gracz1.setPosition(sf::Vector2f(p1.left + 15, p1.top - 8));
 	else if (Komputer == true)
-		Gracz1.setPosition(sf::Vector2f(p1.left + 15.f, p1.top - 8.f));
+		Gracz1.setPosition(sf::Vector2f(p1.left + 15, p1.top - 8));
 
 	Gracz = Gracz1; //Gra z komputerem
 
@@ -157,19 +157,19 @@ void menu2(bool Komputer)
 	sf::Text Gracz2;
 	Gracz2.setFont(font);
 	Gracz2.setCharacterSize(50);
-	Gracz2.setFillColor(sf::Color::Black);
+	Gracz2.setFillColor(czarny);
 	if (Komputer == false) Gracz2.setString("Czarny");
 	else if (Komputer == true) Gracz2.setString("Komputer");
-	Gracz2.setPosition(sf::Vector2f(p2.left + 15.f,  p2.top + p2.height / 2.f - 36.f));
+	Gracz2.setPosition(sf::Vector2f(p2.left + 15,  p2.top + p2.height / 2 - 36));
 
 	//NAG£ÓWEK
-	std::string s1 = "WYBIERZ  NAZWE";
+	std::string s1 = "WPISZ  NAZWE";
 	sf::Text Naglowek(s1, font);
-	Naglowek.setCharacterSize(80);
-	Naglowek.setFillColor(sf::Color::Black);
+	Naglowek.setCharacterSize(100);
+	Naglowek.setFillColor(czarny);
 	sf::FloatRect textCenter1 = Naglowek.getLocalBounds();
-	Naglowek.setOrigin(textCenter1.left + textCenter1.width / 2.f, 0.f);
-	Naglowek.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, 20.f));
+	Naglowek.setOrigin(textCenter1.left + textCenter1.width / 2, 0);
+	Naglowek.setPosition(sf::Vector2f(RozmiarMenuX / 2, 0));
 
 	//NAPIS "GRACZ 1" (GRA DWUOSOBOWA) LUB "NAZWA GRACZA" (GRA Z KOMPUTEREM)
 	std::string s2;
@@ -177,22 +177,22 @@ void menu2(bool Komputer)
 	else if (Komputer == true) s2 = "NAZWA  GRACZA";
 	sf::Text G1(s2, font);
 	G1.setCharacterSize(60);
-	G1.setFillColor(sf::Color::Black);
+	G1.setFillColor(czarny);
 	sf::FloatRect textCenter2 = G1.getLocalBounds();
-	G1.setOrigin(textCenter2.left + textCenter2.width / 2.f, 0.f);
+	G1.setOrigin(textCenter2.left + textCenter2.width / 2, 0);
 	if (Komputer == false)
-		G1.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, 132.5f));
+		G1.setPosition(sf::Vector2f(RozmiarMenuX / 2, 132.5f));
 	else if (Komputer == true)
-		G1.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, RozmiarMenuY/2.f - 220.f));
+		G1.setPosition(sf::Vector2f(RozmiarMenuX / 2, RozmiarMenuY/2 - 220));
 
 	//NAPIS "GRACZ 2"
 	std::string s3 = "GRACZ  2";
 	sf::Text G2(s3, font);
 	G2.setCharacterSize(60);
-	G2.setFillColor(sf::Color::Black);
+	G2.setFillColor(czarny);
 	sf::FloatRect textCenter3 = G2.getLocalBounds();
-	G2.setOrigin(textCenter3.left + textCenter3.width / 2.f, 0.f);
-	G2.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, 440.f));
+	G2.setOrigin(textCenter3.left + textCenter3.width / 2, 0);
+	G2.setPosition(sf::Vector2f(RozmiarMenuX / 2, 446));
 
 	//NAPIS "DALEJ"
 	std::string s4 = "DALEJ";
@@ -200,7 +200,7 @@ void menu2(bool Komputer)
 	Dalej.setCharacterSize(100);
 	Dalej.setFillColor(ciemny);
 	sf::FloatRect textCenter4 = Dalej.getGlobalBounds();
-	Dalej.setPosition(sf::Vector2f(RozmiarMenuX - textCenter4.width - 30.f, RozmiarMenuY - textCenter4.height - 50.f));
+	Dalej.setPosition(sf::Vector2f(RozmiarMenuX - textCenter4.width - 30, RozmiarMenuY - textCenter4.height - 50));
 
 	//T£O MENU
 	sf::Texture Back;
@@ -220,11 +220,11 @@ void menu2(bool Komputer)
 		Bialy.setScale(sf::Vector2f(0.4f, 0.4f));
 	else if (Komputer == true)
 		Bialy.setScale(sf::Vector2f(0.5f, 0.5f));
-	Bialy.setOrigin(Center1.left + Center1.width / 2.f, Center1.top + Center1.height / 2.f);
+	Bialy.setOrigin(Center1.left + Center1.width / 2, Center1.top + Center1.height / 2);
 	if (Komputer == false)
-		Bialy.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, RozmiarMenuY / 2.f - 100.f));
+		Bialy.setPosition(sf::Vector2f(RozmiarMenuX / 2, RozmiarMenuY / 2 - 100));
 	else if (Komputer == true)
-		Bialy.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, RozmiarMenuY / 2.f + 40.f ));
+		Bialy.setPosition(sf::Vector2f(RozmiarMenuX / 2, RozmiarMenuY / 2 + 40 ));
 
 	//CZARNY PIONEK
 	sf::Texture Black;
@@ -237,11 +237,11 @@ void menu2(bool Komputer)
 		Czarny.setScale(sf::Vector2f(0.4f, 0.4f));
 	else if (Komputer == true)
 		Czarny.setScale(sf::Vector2f(0.5f, 0.5f));
-	Czarny.setOrigin(Center2.left + Center2.width / 2.f, Center2.top + Center2.height / 2.f);
+	Czarny.setOrigin(Center2.left + Center2.width / 2, Center2.top + Center2.height / 2);
 	if (Komputer == false)
-		Czarny.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, RozmiarMenuY / 2.f + 220.f));
+		Czarny.setPosition(sf::Vector2f(RozmiarMenuX / 2, RozmiarMenuY / 2 + 220));
 	else if (Komputer == true)
-		Czarny.setPosition(sf::Vector2f(RozmiarMenuX / 2.f, RozmiarMenuY / 2.f + 40.f));
+		Czarny.setPosition(sf::Vector2f(RozmiarMenuX / 2, RozmiarMenuY / 2 + 40));
 
 	//STRZA£KA W LEWO
 	sf::Texture Left;
@@ -251,8 +251,8 @@ void menu2(bool Komputer)
 	Lewa.setTexture(Left);
 	sf::FloatRect Center3 = Lewa.getLocalBounds();
 	Lewa.setScale(sf::Vector2f(0.4f, 0.4f));
-	Lewa.setOrigin(Center3.left + Center3.width / 2.f, Center3.top + Center3.height / 2.f);
-	Lewa.setPosition(sf::Vector2f((Center1.left + Center1.width) / 2.f, Center1.top + Center1.width + 60.f));
+	Lewa.setOrigin(Center3.left + Center3.width / 2, Center3.top + Center3.height / 2);
+	Lewa.setPosition(sf::Vector2f((Center1.left + Center1.width) / 2, Center1.top + Center1.width + 60));
 	Center3 = Lewa.getGlobalBounds();
 
 	//STRZA£KA W PRAWO
@@ -263,8 +263,8 @@ void menu2(bool Komputer)
 	Prawa.setTexture(Right);
 	sf::FloatRect Center4 = Bialy.getLocalBounds();
 	Prawa.setScale(sf::Vector2f(0.4f, 0.4f));
-	Prawa.setOrigin(Center4.left + Center4.width / 2.f, Center4.top + Center4.height / 2.f);
-	Prawa.setPosition(sf::Vector2f((Center1.left + Center1.width) + 80.f, Center1.top + Center1.width + 10.f + 60.f));
+	Prawa.setOrigin(Center4.left + Center4.width / 2, Center4.top + Center4.height / 2);
+	Prawa.setPosition(sf::Vector2f((Center1.left + Center1.width) + 80, Center1.top + Center1.width + 10 + 60));
 	Center4 = Prawa.getGlobalBounds();
 
 	//OKNO MENU
@@ -373,7 +373,7 @@ void menu2(bool Komputer)
 
 			//PRZEJŒCIE DO GRY - PRZYCISK "DALEJ"
 			if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-							 (sf::Mouse::getPosition(window).x > RozmiarMenuX - textCenter4.width - 50.f && sf::Mouse::getPosition(window).x < RozmiarMenuX
+							 (sf::Mouse::getPosition(window).x > RozmiarMenuX - textCenter4.width - 50 && sf::Mouse::getPosition(window).x < RozmiarMenuX
 						   && sf::Mouse::getPosition(window).y > RozmiarMenuY - 2*textCenter4.height && sf::Mouse::getPosition(window).y < RozmiarMenuY))
 			{
 				//SPRAWDZA CZY NAZWY GRACZY SA ROWNE I CZY GRACZ NIE MA NAZWY "Komputer".

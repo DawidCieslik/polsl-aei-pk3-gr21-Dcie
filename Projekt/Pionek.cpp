@@ -2,48 +2,56 @@
 
 Pionek::Pionek()
 {
-	x = 0.f;
-	y = 0.f;
-	typ = TypPionka::PUSTE;
-	tekstura = nullptr;
+	x = 0;
+	y = 0;
 	kolo.setRadius(RozmiarPionka);
+	kolo.setOutlineThickness(4);
+	kolo.setOutlineColor(czarny);
 }
 
 Pionek::Pionek(const Pionek& NowyPionek)
 {
 	x = NowyPionek.x;
 	y = NowyPionek.y;
-	typ = NowyPionek.typ;
-	tekstura = NowyPionek.tekstura;
 }
 
-Pionek::Pionek(float x, float y, TypPionka typ)
+Pionek::Pionek(int x, int y)
 {
 	this->x = x;
 	this->y = y;
-	this->typ = typ;
-	tekstura = nullptr;
 	kolo.setRadius(RozmiarPionka);
+	kolo.setOutlineThickness(4);
+	kolo.setOutlineColor(czarny);
 }
 
-void Pionek::UstawX(float x)
+void Pionek::UstawX(int x)
 {
-	Pole::UstawX(x);
+	this->x = x;
 }
 
-void Pionek::UstawY(float y)
+void Pionek::UstawY(int y)
 {
-	Pole::UstawY(y);
+	this->y = y;
 }
 
-float Pionek::PodajX()
+void Pionek::setOrigin()
 {
-	return Pole::PodajX();
+	kolo.setOrigin(0,-50);
 }
 
-float Pionek::PodajY()
+sf::Vector2f Pionek::getOrigin()
 {
-	return Pole::PodajY();
+	return kolo.getOrigin();
+}
+
+int Pionek::PodajX()
+{
+	return x;
+}
+
+int Pionek::PodajY()
+{
+	return y;
 }
 
 sf::CircleShape Pionek::Ksztalt()
@@ -51,14 +59,9 @@ sf::CircleShape Pionek::Ksztalt()
 	return kolo;
 }
 
-void Pionek::Pozycja(float x, float y)
+void Pionek::Pozycja(int x, int y)
 {
-	kolo.setPosition(x * RozmiarPola + 15.f, y * RozmiarPola + 15.f);
-}
-
-void Pionek::Tekstura(const sf::Texture* tekstura)
-{
-	this->tekstura = tekstura;
+	kolo.setPosition(x * RozmiarPola + 65, y * RozmiarPola + 115);
 }
 
 void Pionek::Kolor(const sf::Color& kolor)
@@ -66,15 +69,14 @@ void Pionek::Kolor(const sf::Color& kolor)
 	kolo.setFillColor(kolor);
 }
 
-void Pionek::UstawTyp(TypPionka typ)
+void Pionek::setOutlineColor(sf::Color kolor)
 {
-	this->typ = typ;
+	kolo.setOutlineColor(kolor);
 }
 
 Pionek& Pionek::operator=(const Pionek& NowyPionek)
 {
 	x = NowyPionek.x;
 	y = NowyPionek.y;
-	typ = NowyPionek.typ;
 	return *this;
 }

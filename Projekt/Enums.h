@@ -1,24 +1,37 @@
 #pragma once
 
-enum class TypPionka
+#define piece plansza.DajPionek
+#define field plansza.DajPole
+
+#define bialy sf::Color::White
+#define czarny sf::Color::Black
+
+#define JASNE TypPola::INVALID
+#define PUSTE TypPola::EMPTY
+#define BIALY_PIONEK TypPola::WHITE
+#define CZARNY_PIONEK TypPola::BLACK
+#define BIALA_DAMKA TypPola::WHITE_KING
+#define CZARNA_DAMKA TypPola::BLACK_KING
+
+enum class TypPola
 {
-	PUSTE = 0,
-	CZARNY = 1,
-	BIALY = 2,
-	CZARNY_DAMKA = 3,
-	BIALY_DAMKA = 4,
-	INVALID = -1,
+	INVALID,
+	EMPTY,
+	WHITE,
+	BLACK,
+	WHITE_KING,
+	BLACK_KING
 };
 
 namespace
 {
 	const int RozmiarPlanszy = 8;
-	const float RozmiarMenuX = 700.f;
-	const float RozmiarMenuY = 900.f;
-	const float RozmiarOknaX = 900.f;
-	const float RozmiarOknaY = 950.f;
-	const float RozmiarPola = 100.f;
-	const float RozmiarPionka = 35.f;
+	const int RozmiarMenuX = 700;
+	const int RozmiarMenuY = 900;
+	const int RozmiarOknaX = 900;
+	const int RozmiarOknaY = 950;
+	const int RozmiarPola = 100;
+	const int RozmiarPionka = 35;
 	sf::Color jasny(238, 232, 170);
 	sf::Color ciemny(92, 17, 9);
 	sf::Color szary(127, 127, 127);
