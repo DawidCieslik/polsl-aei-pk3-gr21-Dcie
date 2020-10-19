@@ -152,6 +152,7 @@
     <ClCompile Include="Pole.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plansza.cpp" />
+    <ClCompile Include="Poruszanie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enums.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Pionek.h" />
     <ClInclude Include="Pole.h" />
     <ClInclude Include="Plansza.h" />
+    <ClInclude Include="Poruszanie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

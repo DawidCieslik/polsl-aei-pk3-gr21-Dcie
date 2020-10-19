@@ -29,8 +29,11 @@ void Plansza::InicjalizujPlansze()
 		for (int x = 0; x < RozmiarPlanszy; x++)
 		{
 			ListaPol* NowePole = new ListaPol;
+			ListaPionkow* NowyPionek = new ListaPionkow;
 			NowePole->pole.UstawX(x);
 			NowePole->pole.UstawY(y);
+			NowyPionek->pionek.UstawX(x);
+			NowyPionek->pionek.UstawY(y);
 			if ((x + y) % 2 == 0)
 			{
 				NowePole->pole.Kolor(jasny);
@@ -40,50 +43,27 @@ void Plansza::InicjalizujPlansze()
 			{
 				NowePole->pole.Kolor(ciemny);
 				if (y >= 0 && y <= 2)
+				{
 					NowePole->pole.typ = CZARNY_PIONEK;
+					NowyPionek->pionek.Promien();
+					NowyPionek->pionek.Kontur();
+					NowyPionek->pionek.KolorKonturu(czarny);
+					NowyPionek->pionek.Kolor(sf::Color::Black);
+					NowyPionek->pionek.Pozycja(x, y);
+				}
 				else if (y >= 5 && y < RozmiarPlanszy)
+				{
 					NowePole->pole.typ = BIALY_PIONEK;
+					NowyPionek->pionek.Promien();
+					NowyPionek->pionek.Kontur();
+					NowyPionek->pionek.KolorKonturu(czarny);
+					NowyPionek->pionek.Kolor(sf::Color::White);
+					NowyPionek->pionek.Pozycja(x, y);
+				}
 			}
 			NowePole->pole.Pozycja(x, y);
 			(*this) += NowePole;
-		}
-	}
-	RozstawPionki();
-}
-
-void Plansza::RozstawPionki()
-{
-	//USTAWIANIE CZARNYCH PIONKÓW
-	for (int y = 0; y <= 2; y++)
-	{
-		for (int x = 0; x < RozmiarPlanszy; x++)
-		{
-			if ((x + y) % 2 != 0)
-			{
-				ListaPionkow* NowyPionek = new ListaPionkow;
-				NowyPionek->pionek.UstawX(x);
-				NowyPionek->pionek.UstawY(y);
-				NowyPionek->pionek.Kolor(sf::Color::Black);
-				NowyPionek->pionek.Pozycja(x, y);
-				(*this) += NowyPionek;
-			}
-		}
-	}
-
-	//USTAWIANIE BIA£YCH PIONKÓW
-	for (int y = 5; y < RozmiarPlanszy; y++)
-	{
-		for (int x = 0; x < RozmiarPlanszy; x++)
-		{
-			if ((x + y) % 2 != 0)
-			{
-				ListaPionkow* NowyPionek = new ListaPionkow;
-				NowyPionek->pionek.UstawX(x);
-				NowyPionek->pionek.UstawY(y);
-				NowyPionek->pionek.Kolor(sf::Color::White);
-				NowyPionek->pionek.Pozycja(x, y);
-				(*this) += NowyPionek;
-			}
+			(*this) += NowyPionek;
 		}
 	}
 }
@@ -95,6 +75,7 @@ void Plansza::WyswietlPlansze(sf::RenderWindow &window)
 		for (int x = 0; x < RozmiarPlanszy; x++)
 		{
 			window.draw(DajPole(x, y).Ksztalt());
+			window.draw(DajPionek(x, y).Ksztalt());
 		}
 	}
 }
@@ -121,16 +102,6 @@ Pole& Plansza::DajPole(int i, int j)
 		temp = temp->pNext;
 	}
 	Blad(1);
-}
-
-void Plansza::RysujPionki(sf::RenderWindow &window)
-{
-	ListaPionkow* temp = pPionek;
-	while (temp)
-	{
-		window.draw(temp->pionek.Ksztalt());
-		temp = temp->pNext;
-	}
 }
 
 Plansza& Plansza::operator+=(ListaPol* NowePole)

@@ -7,9 +7,12 @@ void Gra(sf::Text& Gracz1, sf::Text& Gracz2, bool& Komputer)
 	std::string gracz2 = Gracz2.getString();	//NAZWA GRACZA 2
 
 	int tura = 0;								//KTÓRA TURA Z KOLEI
-	int x = -1;								//WSPÓ£RZÊDNA X
-	int y = -1;								//WSPÓ£RZÊDNA Y
+	int x = -1;									//WSPÓ£RZÊDNA X
+	int y = -1;									//WSPÓ£RZÊDNA Y
+	int NoweX = -1;								//NOWA WSPÓ£RZÊDNA X
+	int NoweY = -1;								//NOWA WSPÓ£RZÊDNA Y
 	bool focus = false;							//FOCUS NA PIONKU
+	Kierunek kierunek = Kierunek::BRAK;			//KIERUNEK PRZESUNIÊCIA PIONKA
 	
 	//TEKSTURA T£A - ¯Ó£TE
 	sf::Texture Yellow;
@@ -193,258 +196,86 @@ void Gra(sf::Text& Gracz1, sf::Text& Gracz2, bool& Komputer)
 			}
 
 			//ODCZYTYWANIE WSPÓ£RZÊDNYCH ZAZNACZONEGO PIONKA
-			if (focus == false && event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-												sf::Mouse::getPosition(window).x > 50 && sf::Mouse::getPosition(window).x < 850 &&
-												sf::Mouse::getPosition(window).y > 100 && sf::Mouse::getPosition(window).y < 900 )
-			{
-				//USTAWIA WSPÓ£RZÊDNE X I Y W MIEJSCU ZAZNACZONEGO PIONKA
-				x = (sf::Mouse::getPosition(window).x - 50) / RozmiarPola;
-				y = (sf::Mouse::getPosition(window).y - 100) / RozmiarPola;
-
-				//USTAWIA FOCUS NA KLIKNIÊTYM PIONKU
-				if (tura % 2 == 0)												//TURA GRACZA BIA£EGO
-				{
-					if (field(x, y).typ == BIALY_PIONEK || field(x, y).typ == BIALA_DAMKA)
-						focus = true;
-				}
-				else if (tura % 2 == 1)											//TURA GRACZA CZARNEGO
-				{
-					if (field(x, y).typ == CZARNY_PIONEK || field(x, y).typ == CZARNA_DAMKA)
-						focus = true;
-				}
-			}
-
-			//ODZNACZENIE PIONKA
-			if (focus == true && event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Right))
-				focus = false;
-
-			//PRZESUNIÊCIE PIONKA NA NOWE POLE
-			if (focus == true)
+			if (focus == false)
 			{
 				if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-								  sf::Mouse::getPosition(window).x > (100 * x) - 50 && sf::Mouse::getPosition(window).x < (100 * x) + 50 &&
-								  sf::Mouse::getPosition(window).y > 100 * y && sf::Mouse::getPosition(window).y < (100 * y) + 100)
+								  sf::Mouse::getPosition(window).x > 50 && sf::Mouse::getPosition(window).x < 850 &&
+								  sf::Mouse::getPosition(window).y > 100 && sf::Mouse::getPosition(window).y < 900 )
 				{
-					if (field(x, y).typ == BIALY_PIONEK || field(x, y).typ == BIALA_DAMKA ||
-						field(x, y).typ == CZARNY_PIONEK || field(x, y).typ == CZARNA_DAMKA)
+					//USTAWIA WSPÓ£RZÊDNE X I Y W MIEJSCU ZAZNACZONEGO PIONKA
+					x = (sf::Mouse::getPosition(window).x - 50) / RozmiarPola;
+					y = (sf::Mouse::getPosition(window).y - 100) / RozmiarPola;
+
+					//USTAWIA FOCUS NA KLIKNIÊTYM PIONKU
+					if (tura % 2 == 0)												//TURA GRACZA BIA£EGO
 					{
-						//GÓRNA LEWA PRZEK¥TNA
-						if (x != 0 && y != 0 && field(x - 1, y - 1).typ == PUSTE)
-						{
-							//piece(x, y).setOutlineColor(czarny);
-
-							if (x != 0 && y != 0 && field(x - 1, y - 1).typ == PUSTE)
-								field(x - 1, y - 1).Kolor(ciemny);				//GÓRNA LEWA PRZEK¥TNA PUSTA
-							else if (x != 0 && y != 0 && (field(x - 1, y - 1).typ == CZARNY_PIONEK || field(x - 1, y - 1).typ == CZARNA_DAMKA))
-								field(x - 2, y - 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA GÓRNEJ LEWEJ PRZEKATNEJ
-							if (x != 7 && y != 0 && field(x + 1, y - 1).typ == PUSTE)
-								field(x + 1, y - 1).Kolor(ciemny);				//GÓRNA PRAWA PRZEK¥TNA PUSTA
-							else if (x != 7 && y != 0 && (field(x + 1, y - 1).typ == CZARNY_PIONEK || field(x + 1, y - 1).typ == CZARNA_DAMKA))
-								field(x + 2, y - 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA GÓRNEJ PRAWEJ PRZEKATNEJ
-
-							//ZMIANA TYPU POLA
-							if (field(x, y).typ == BIALY_PIONEK)
-								field(x - 1, y - 1).typ = BIALY_PIONEK;
-							else if (field(x, y).typ == BIALA_DAMKA)
-								field(x - 1, y - 1).typ = BIALA_DAMKA;
-							else if (field(x, y).typ == CZARNA_DAMKA)
-								field(x - 1, y - 1).typ = CZARNA_DAMKA;
-
-							piece(x, y).Pozycja(x - 0.5f, y);
-							std::cout << x - 1 << " " << piece(x, y).PodajX() << std::endl;
-							piece(x, y).UstawX(x - 1);
-							std::cout << x - 1 << " " << piece(x, y).PodajX() << std::endl;
-							piece(x, y).UstawY(y - 1);
-							std::cout << y - 1 << " " << piece(x, y).PodajY() << std::endl;
-							//tura++;
-							focus = false;
-							x = -1;
-							y = -1;
-						}
+						if (field(x, y).typ == BIALY_PIONEK || field(x, y).typ == BIALA_DAMKA)
+							focus = true;
+					}
+					else if (tura % 2 == 1)											//TURA GRACZA CZARNEGO
+					{
+						if (field(x, y).typ == CZARNY_PIONEK || field(x, y).typ == CZARNA_DAMKA)
+							focus = true;
 					}
 				}
 			}
-		}
 
-		//RYSOWANIE MO¯LIWYCH RUCHÓW PIONKA
-		if (focus == true && (x != -1 || y != -1))
-		{
-			if (field(x, y).typ != JASNE && field(x, y).typ != PUSTE)
+			if (focus == true)
 			{
-				//piece(x, y).setOutlineColor(sf::Color::Red);
+				//ODZNACZENIE PIONKA
+				if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Right))
+					focus = false;
 
-				//BIA£Y PIONEK
-				if (field(x, y).typ == BIALY_PIONEK)
+				//PRZESUNIÊCIE PIONKA NA NOWE POLE
+				if (event.type == sf::Event::MouseButtonPressed && sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
-					if (x != 0 && y != 0 && field(x - 1, y - 1).typ == PUSTE)
-						field(x - 1, y - 1).Kolor(sf::Color::Red);				//GÓRNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 0 && (field(x - 1, y - 1).typ == CZARNY_PIONEK || field(x - 1, y - 1).typ == CZARNA_DAMKA))
-						field(x - 2, y - 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA GÓRNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 0 && field(x + 1, y - 1).typ == PUSTE)
-						field(x + 1, y - 1).Kolor(sf::Color::Red);				//GÓRNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 0 && (field(x + 1, y - 1).typ == CZARNY_PIONEK || field(x + 1, y - 1).typ == CZARNA_DAMKA))
-						field(x + 2, y - 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA GÓRNEJ PRAWEJ PRZEKATNEJ
-				}
-
-				//BIA£A DAMKA
-				if (field(x, y).typ == BIALA_DAMKA)
-				{
-					if (x != 0 && y != 7 && field(x - 1, y + 1).typ == PUSTE)
-						field(x - 1, y + 1).Kolor(sf::Color::Red);				//DOLNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 7 && (field(x - 1, y + 1).typ == CZARNY_PIONEK || field(x - 1, y + 1).typ == CZARNA_DAMKA))
-						field(x - 2, y + 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA DOLNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 7 && field(x + 1, y + 1).typ == PUSTE)
-						field(x + 1, y + 1).Kolor(sf::Color::Red);				//DOLNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 7 && (field(x + 1, y + 1).typ == CZARNY_PIONEK || field(x + 1, y + 1).typ == CZARNA_DAMKA))
-						field(x + 2, y + 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA DOLNEJ PRAWEJ PRZEKATNEJ
-					if (x != 0 && y != 0 && field(x - 1, y - 1).typ == PUSTE)
-						field(x - 1, y - 1).Kolor(sf::Color::Red);				//GÓRNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 0 && (field(x - 1, y - 1).typ == CZARNY_PIONEK || field(x - 1, y - 1).typ == CZARNA_DAMKA))
-						field(x - 2, y - 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA GÓRNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 0 && field(x + 1, y - 1).typ == PUSTE)
-						field(x + 1, y - 1).Kolor(sf::Color::Red);				//GÓRNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 0 && (field(x + 1, y - 1).typ == CZARNY_PIONEK || field(x + 1, y - 1).typ == CZARNA_DAMKA))
-						field(x + 2, y - 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA GÓRNEJ PRAWEJ PRZEKATNEJ
-				}
-
-				//CZARNY PIONEK
-				if (field(x, y).typ == CZARNY_PIONEK)
-				{
-					if (x != 0 && y != 7 && field(x - 1, y + 1).typ == PUSTE)
-						field(x - 1, y + 1).Kolor(sf::Color::Red);				//DOLNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 7 && (field(x - 1, y + 1).typ == BIALY_PIONEK || field(x - 1, y + 1).typ == BIALA_DAMKA))
-						field(x - 2, y + 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA DOLNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 7 && field(x + 1, y + 1).typ == PUSTE)
-						field(x + 1, y + 1).Kolor(sf::Color::Red);				//DOLNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 7 && (field(x + 1, y + 1).typ == BIALY_PIONEK || field(x + 1, y + 1).typ == BIALA_DAMKA))
-						field(x + 2, y + 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA DOLNEJ PRAWEJ PRZEKATNEJ
-				}
-
-				//CZARNA DAMKA
-				if (field(x, y).typ == CZARNA_DAMKA)
-				{
-					if (x != 0 && y != 7 && field(x - 1, y + 1).typ == PUSTE)
-						field(x - 1, y + 1).Kolor(sf::Color::Red);				//DOLNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 7 && (field(x - 1, y + 1).typ == BIALY_PIONEK || field(x - 1, y + 1).typ == BIALA_DAMKA))
-						field(x - 2, y + 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA DOLNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 7 && field(x + 1, y + 1).typ == PUSTE)
-						field(x + 1, y + 1).Kolor(sf::Color::Red);				//DOLNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 7 && (field(x + 1, y + 1).typ == BIALY_PIONEK || field(x + 1, y + 1).typ == BIALA_DAMKA))
-						field(x + 2, y + 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA DOLNEJ PRAWEJ PRZEKATNEJ
-					if (x != 0 && y != 0 && field(x - 1, y - 1).typ == PUSTE)
-						field(x - 1, y - 1).Kolor(sf::Color::Red);				//GÓRNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 0 && (field(x - 1, y - 1).typ == BIALY_PIONEK || field(x - 1, y - 1).typ == BIALA_DAMKA))
-						field(x - 2, y - 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA GÓRNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 0 && field(x + 1, y - 1).typ == PUSTE)
-						field(x + 1, y - 1).Kolor(sf::Color::Red);				//GÓRNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 0 && (field(x + 1, y - 1).typ == BIALY_PIONEK || field(x + 1, y - 1).typ == BIALA_DAMKA))
-						field(x + 2, y - 2).Kolor(sf::Color::Red);				//PIONEK PRZECIWNIKA NA GÓRNEJ PRAWEJ PRZEKATNEJ
-				}
-			}
-		}
-
-		//ODZNACZENIE MO¯LIWYCH RUCHÓW PIONKA
-		if (focus == false && (x != -1 || y != -1))
-		{
-			if (field(x, y).typ != JASNE && field(x, y).typ != PUSTE)
-			{
-				//piece(x, y).setOutlineColor(czarny);
-
-				//BIA£Y PIONEK
-				if (field(x, y).typ == BIALY_PIONEK)
-				{
-					if (x != 0 && y != 0 && field(x - 1, y - 1).typ == PUSTE)
-						field(x - 1, y - 1).Kolor(ciemny);				//GÓRNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 0 && (field(x - 1, y - 1).typ == CZARNY_PIONEK || field(x - 1, y - 1).typ == CZARNA_DAMKA))
-						field(x - 2, y - 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA GÓRNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 0 && field(x + 1, y - 1).typ == PUSTE)
-						field(x + 1, y - 1).Kolor(ciemny);				//GÓRNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 0 && (field(x + 1, y - 1).typ == CZARNY_PIONEK || field(x + 1, y - 1).typ == CZARNA_DAMKA))
-						field(x + 2, y - 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA GÓRNEJ PRAWEJ PRZEKATNEJ
-				}
-
-				//BIA£A DAMKA
-				if (field(x, y).typ == BIALA_DAMKA)
-				{
-					if (x != 0 && y != 7 && field(x - 1, y + 1).typ == PUSTE)
-						field(x - 1, y + 1).Kolor(ciemny);				//DOLNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 7 && (field(x - 1, y + 1).typ == CZARNY_PIONEK || field(x - 1, y + 1).typ == CZARNA_DAMKA))
-						field(x - 2, y + 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA DOLNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 7 && field(x + 1, y + 1).typ == PUSTE)
-						field(x + 1, y + 1).Kolor(ciemny);				//DOLNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 7 && (field(x + 1, y + 1).typ == CZARNY_PIONEK || field(x + 1, y + 1).typ == CZARNA_DAMKA))
-						field(x + 2, y + 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA DOLNEJ PRAWEJ PRZEKATNEJ
-					if (x != 0 && y != 0 && field(x - 1, y - 1).typ == PUSTE)
-						field(x - 1, y - 1).Kolor(ciemny);				//GÓRNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 0 && (field(x - 1, y - 1).typ == CZARNY_PIONEK || field(x - 1, y - 1).typ == CZARNA_DAMKA))
-						field(x - 2, y - 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA GÓRNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 0 && field(x + 1, y - 1).typ == PUSTE)
-						field(x + 1, y - 1).Kolor(ciemny);				//GÓRNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 0 && (field(x + 1, y - 1).typ == CZARNY_PIONEK || field(x + 1, y - 1).typ == CZARNA_DAMKA))
-						field(x + 2, y - 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA GÓRNEJ PRAWEJ PRZEKATNEJ
-				}
-
-				//CZARNY PIONEK
-				if (field(x, y).typ == CZARNY_PIONEK)
-				{
-					if (x != 0 && y != 7 && field(x - 1, y + 1).typ == PUSTE)
-						field(x - 1, y + 1).Kolor(ciemny);				//DOLNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 7 && (field(x - 1, y + 1).typ == BIALY_PIONEK || field(x - 1, y + 1).typ == BIALA_DAMKA))
-						field(x - 2, y + 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA DOLNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 7 && field(x + 1, y + 1).typ == PUSTE)
-						field(x + 1, y + 1).Kolor(ciemny);				//DOLNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 7 && (field(x + 1, y + 1).typ == BIALY_PIONEK || field(x + 1, y + 1).typ == BIALA_DAMKA))
-						field(x + 2, y + 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA DOLNEJ PRAWEJ PRZEKATNEJ
-				}
-
-				//CZARNA DAMKA
-				if (field(x, y).typ == CZARNA_DAMKA)
-				{
-					if (x != 0 && y != 7 && field(x - 1, y + 1).typ == PUSTE)
-						field(x - 1, y + 1).Kolor(ciemny);				//DOLNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 7 && (field(x - 1, y + 1).typ == BIALY_PIONEK || field(x - 1, y + 1).typ == BIALA_DAMKA))
-						field(x - 2, y + 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA DOLNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 7 && field(x + 1, y + 1).typ == PUSTE)
-						field(x + 1, y + 1).Kolor(ciemny);				//DOLNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 7 && (field(x + 1, y + 1).typ == BIALY_PIONEK || field(x + 1, y + 1).typ == BIALA_DAMKA))
-						field(x + 2, y + 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA DOLNEJ PRAWEJ PRZEKATNEJ
-					if (x != 0 && y != 0 && field(x - 1, y - 1).typ == PUSTE)
-						field(x - 1, y - 1).Kolor(ciemny);				//GÓRNA LEWA PRZEK¥TNA PUSTA
-					else if (x != 0 && y != 0 && (field(x - 1, y - 1).typ == BIALY_PIONEK || field(x - 1, y - 1).typ == BIALA_DAMKA))
-						field(x - 2, y - 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA GÓRNEJ LEWEJ PRZEKATNEJ
-					if (x != 7 && y != 0 && field(x + 1, y - 1).typ == PUSTE)
-						field(x + 1, y - 1).Kolor(ciemny);				//GÓRNA PRAWA PRZEK¥TNA PUSTA
-					else if (x != 7 && y != 0 && (field(x + 1, y - 1).typ == BIALY_PIONEK || field(x + 1, y - 1).typ == BIALA_DAMKA))
-						field(x + 2, y - 2).Kolor(ciemny);				//PIONEK PRZECIWNIKA NA GÓRNEJ PRAWEJ PRZEKATNEJ
+					if (sf::Mouse::getPosition(window).x > 100 * x - 50 && sf::Mouse::getPosition(window).x < 100 * x + 50 &&
+						sf::Mouse::getPosition(window).y > 100 * y && sf::Mouse::getPosition(window).y < 100 * y + 100)
+						kierunek = GL;
+					else if (sf::Mouse::getPosition(window).x > 100 * x + 150 && sf::Mouse::getPosition(window).x < 100 * x + 250 &&
+						sf::Mouse::getPosition(window).y > 100 * y && sf::Mouse::getPosition(window).y < 100 * y + 100)
+						kierunek = GP;
+					else if (sf::Mouse::getPosition(window).x > 100 * x + 150 && sf::Mouse::getPosition(window).x < 100 * x + 250 &&
+						sf::Mouse::getPosition(window).y > 100 * y + 200 && sf::Mouse::getPosition(window).y < 100 * y + 300)
+						kierunek = DP;
+					else if (sf::Mouse::getPosition(window).x > 100 * x - 50 && sf::Mouse::getPosition(window).x < 100 * x + 50 &&
+						sf::Mouse::getPosition(window).y > 100 * y + 200 && sf::Mouse::getPosition(window).y < 100 * y + 300)
+						kierunek = DL;
+					else if (sf::Mouse::getPosition(window).x > 100 * x - 150 && sf::Mouse::getPosition(window).x < 100 * x - 50 &&
+						sf::Mouse::getPosition(window).y > 100 * y - 100 && sf::Mouse::getPosition(window).y < 100 * y)
+						kierunek = GL2;
+					else if (sf::Mouse::getPosition(window).x > 100 * x + 150 && sf::Mouse::getPosition(window).x < 100 * x + 250 &&
+						sf::Mouse::getPosition(window).y > 100 * y - 100 && sf::Mouse::getPosition(window).y < 100 * y)
+						kierunek = GP2;
+					else if (sf::Mouse::getPosition(window).x > 100 * x + 150 && sf::Mouse::getPosition(window).x < 100 * x + 250 &&
+						sf::Mouse::getPosition(window).y > 100 * y + 300 && sf::Mouse::getPosition(window).y < 100 * y + 400)
+						kierunek = DP2;
+					else if (sf::Mouse::getPosition(window).x > 100 * x - 150 && sf::Mouse::getPosition(window).x < 100 * x - 50 &&
+						sf::Mouse::getPosition(window).y > 100 * y + 300 && sf::Mouse::getPosition(window).y < 100 * y + 400)
+						kierunek = DL2;
+					std::cout << x << " " << y << std::endl;
+					switch (kierunek)
+					{
+					case GL: std::cout << "1";
+					case GP: std::cout << "2";
+					case DP: std::cout << "3";
+					case DL: std::cout << "4";
+					case GL2: std::cout << "5";
+					case GP2: std::cout << "6";
+					case DP2: std::cout << "7";
+					case DL2: std::cout << "8";
+					default: std::cout << "9";
+					}
+					PrzesunPionka(plansza, tura, x, y, kierunek);
+					focus = false;
 				}
 			}
 		}
 		
-		//ZMIANA NAPISU TURY I TYTU£U GRY NA BIA£Y
-		if (tura % 2 == 0)
-		{
-			s2 += gracz1;
-			turaGracza.setString(s2);
-			sf::FloatRect textCenter2 = turaGracza.getLocalBounds();
-			turaGracza.setOrigin(textCenter2.left + textCenter2.width / 2, 0);
-			turaGracza.setPosition(sf::Vector2f(RozmiarOknaX / 2, 40));
-			s2.erase(6, s2.length());
-			turaGracza.setFillColor(bialy);
-			tytul.setFillColor(bialy);
-		}
+		if (focus == true)
+			Zaznacz(x, y, plansza);
 
-		//ZMIANA NAPISU TURY I TYTU£U GRY NA CZARNY
-		else if (tura % 2 == 1)
-		{
-			s2 += gracz2;
-			turaGracza.setString(s2);
-			sf::FloatRect textCenter2 = turaGracza.getLocalBounds();
-			turaGracza.setOrigin(textCenter2.left + textCenter2.width / 2, 0);
-			turaGracza.setPosition(sf::Vector2f(RozmiarOknaX / 2, 40));
-			s2.erase(6, s2.length());
-			turaGracza.setFillColor(czarny);
-			tytul.setFillColor(czarny);
-		}
+		ZmienKolorNaglowka(tura, s2, gracz1, gracz2, turaGracza, tytul);
 
 		window.draw(background);				//RYSUJE T£O GRY
 		window.draw(tytul);						//RYSUJE TYTU£ GRY
@@ -454,7 +285,6 @@ void Gra(sf::Text& Gracz1, sf::Text& Gracz2, bool& Komputer)
 		window.draw(Gracz1);					//RYSUJE NAZWÊ GRACZA 1
 		window.draw(Gracz2);					//RYSUJE NAZWÊ GRACZA 2
 		plansza.WyswietlPlansze(window);		//RYSUJE PLANSZÊ
-		plansza.RysujPionki(window);			//RYSUJE PIONKI
 
 		window.display();						//WYŒWIETLA GRÊ
 	}

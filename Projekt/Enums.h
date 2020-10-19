@@ -5,6 +5,7 @@
 
 #define bialy sf::Color::White
 #define czarny sf::Color::Black
+#define czerwony sf::Color::Red
 
 #define JASNE TypPola::INVALID
 #define PUSTE TypPola::EMPTY
@@ -12,6 +13,15 @@
 #define CZARNY_PIONEK TypPola::BLACK
 #define BIALA_DAMKA TypPola::WHITE_KING
 #define CZARNA_DAMKA TypPola::BLACK_KING
+
+#define GL Kierunek::GÓRNY_LEWY
+#define GP Kierunek::GÓRNY_PRAWY
+#define DP Kierunek::DOLNY_PRAWY
+#define DL Kierunek::DOLNY_LEWY
+#define GL2 Kierunek::PIONEK_PRZECIWNIKA_NA_GÓRNEJ_LEWEJ_PRZEK¥TNEJ
+#define GP2 Kierunek::PIONEK_PRZECIWNIKA_NA_GÓRNEJ_PRAWEJ_PRZEK¥TNEJ
+#define DP2 Kierunek::PIONEK_PRZECIWNIKA_NA_DOLNEJ_PRAWEJ_PRZEK¥TNEJ
+#define DL2 Kierunek::PIONEK_PRZECIWNIKA_NA_DOLNEJ_LEWEJ_PRZEK¥TNEJ
 
 enum class TypPola
 {
@@ -21,6 +31,19 @@ enum class TypPola
 	BLACK,
 	WHITE_KING,
 	BLACK_KING
+};
+
+enum class Kierunek
+{
+	BRAK,
+	GÓRNY_LEWY,
+	GÓRNY_PRAWY,
+	DOLNY_PRAWY,
+	DOLNY_LEWY,
+	PIONEK_PRZECIWNIKA_NA_GÓRNEJ_LEWEJ_PRZEK¥TNEJ,
+	PIONEK_PRZECIWNIKA_NA_GÓRNEJ_PRAWEJ_PRZEK¥TNEJ,
+	PIONEK_PRZECIWNIKA_NA_DOLNEJ_PRAWEJ_PRZEK¥TNEJ,
+	PIONEK_PRZECIWNIKA_NA_DOLNEJ_LEWEJ_PRZEK¥TNEJ
 };
 
 namespace
